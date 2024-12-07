@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry Srushti Baby</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap'); /* Adding a playful font */
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Pacifico', cursive; /* Informal, cute font */
+            overflow: hidden;
+            background-color: #ffebee; /* Light pink background */
+        }
+
+        .background-rose {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/f1/Bouquet-of-Red-Roses.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .message {
+            font-size: 3.5rem; /* Larger font size */
+            color: #d32f2f; /* Deep red color */
+            text-align: center;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1.5s ease-out forwards;
+            max-width: 90%;
+            line-height: 1.5; /* Improve text readability */
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .falling-rose {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/f1/Bouquet-of-Red-Roses.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.8;
+            animation: fallAndDrift 12s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes fallAndDrift {
+            0% {
+                transform: translateY(-100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) translateX(calc(-50px + 100vw)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .message {
+                font-size: 2.5rem;
+                padding: 20px;
+            }
+
+            .falling-rose {
+                width: 40px;
+                height: 40px;
+            }
+
+            .background-rose {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .message {
+                font-size: 2rem;
+                padding: 15px;
+            }
+
+            .falling-rose {
+                width: 30px;
+                height: 30px;
+            }
+
+            .background-rose {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Static background rose image -->
+    <div class="background-rose"></div>
+
+    <!-- Text container -->
+    <div class="container">
+        <div class="message">I am sorry, Srushti baby! 💕</div>
+    </div>
+
+    <script>
+        function createFallingRose() {
+            const rose = document.createElement('div');
+            rose.classList.add('falling-rose');
+
+            // Randomize rose size, position, and animation duration
+            const size = Math.random() * (80 - 40) + 40;
+            rose.style.width = `${size}px`;
+            rose.style.height = `${size}px`;
+
+            rose.style.left = `${Math.random() * 100}vw`;
+            rose.style.animationDuration = `${Math.random() * (12 - 8) + 8}s`;
+
+            document.body.appendChild(rose);
+
+            // Remove rose after animation completes
+            setTimeout(() => {
+                rose.remove();
+            }, parseFloat(rose.style.animationDuration) * 1000);
+        }
+
+        // Create roses at regular intervals
+        setInterval(createFallingRose, 300);
+
+        // Create initial batch of roses
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createFallingRose, Math.random() * 5000);
+        }
+    </script>
+</body>
+</html>
